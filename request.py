@@ -7,7 +7,7 @@ from ast import literal_eval
 
 
 base_url = "http://localhost:9200"
-data_stream = "nyc"
+data_stream = "food-inspections"
 results_qtd = 20
 
 url_get = f"{base_url}/{data_stream}/_search"
@@ -58,14 +58,17 @@ def post_from_csv(csv_file:str):
 def post_from_json_file(json_file:str):
     with open(json_file) as f:
         record_list_raw = f.readlines()
-        record_list_cleaned = [literal_eval(i) for i in record_list_raw]
-        for i in record_list_cleaned:
-            r = post_request(i,url_post)
-            print(r)
+        for i in record_list_raw:
+            try:
+                cleaned = literal_eval(i)
+                r = post_request(cleaned,url_post)
+                print(r)
+            except:
+                continue
 
 # # a = put_request(json_put, url_put)
-a = get_request(json_get_all, url_get)
+# a = get_request(json_get_all, url_get)
 # a = len(a)
-# post_from_csv("nyc.csv")
-pprint(a)
-# post_from_json_file("logs.json")
+post_from_csv("food-inspections.csv")
+# pprint(a)
+# post_from_json_file("log/log.log")
