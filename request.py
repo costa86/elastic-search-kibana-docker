@@ -7,7 +7,7 @@ from ast import literal_eval
 
 
 base_url = "http://localhost:9200"
-data_stream = "food-inspections"
+data_stream = "nyc"
 results_qtd = 20
 
 url_get = f"{base_url}/{data_stream}/_search"
@@ -69,6 +69,6 @@ def post_from_json_file(json_file:str):
 # # a = put_request(json_put, url_put)
 # a = get_request(json_get_all, url_get)
 # a = len(a)
-post_from_csv("food-inspections.csv")
+post_from_csv("nyc.csv")
 # pprint(a)
 # post_from_json_file("log/log.log")
