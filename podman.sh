@@ -18,6 +18,7 @@ podman pod create --name ${POD} -p ${KIBANA_PORT}:${KIBANA_PORT} -p ${ES_PORT}:$
 podman run --pod=$POD \
 -e ELASTICSEARCH_HOSTS=http://localhost:${ES_PORT} \
 --name kibana \
+--user ${UID} \
 -d ${KIBANA_IMAGE}
 
 #ES
@@ -26,4 +27,5 @@ podman run --pod=$POD \
 -e xpack.security.enabled=false \
 -v ${PWD}/${ES_VOLUME_FOLDER}:/usr/share/elasticsearch/data \
 --name es \
+--user ${UID} \
 -d ${ES_IMAGE}

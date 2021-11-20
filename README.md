@@ -1,4 +1,4 @@
-# Elasticsearch + Kibana in Docker
+# Elasticsearch + Kibana in Docker and Podman
 
 ## Run project
 ### Docker
@@ -36,3 +36,15 @@ Create config file for Kubernetes
 List of pods and containers
 
     podman ps -a --pod
+
+Find out which user the image "wants" to run as
+
+    podman run --rm --entrypoint '' <image> id
+
+Container processes
+    
+    podman top <container_name>
+
+Stop pod
+
+    alias stop='podman pod stop <pod_name> && podman pod rm <pod_name>'
