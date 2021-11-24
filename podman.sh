@@ -1,10 +1,17 @@
-#variables
-POD=elk
-ES_PORT=9200
-KIBANA_PORT=5601
-ES_IMAGE=elasticsearch:7.14.1
-KIBANA_IMAGE=kibana:7.14.1
-ES_VOLUME_FOLDER=es_data
+#variables file
+ENV_FILE=env.env
+
+get_var_from_env_file () {
+    echo $(grep $1 ${ENV_FILE} | cut -d '=' -f2)
+}
+
+#variables from env file
+POD=$(get_var_from_env_file POD)
+ES_PORT=$(get_var_from_env_file ES_PORT)
+KIBANA_PORT=$(get_var_from_env_file KIBANA_PORT)
+ES_IMAGE=$(get_var_from_env_file ES_IMAGE)
+KIBANA_IMAGE=$(get_var_from_env_file KIBANA_IMAGE)
+ES_VOLUME_FOLDER=$(get_var_from_env_file ES_VOLUME_FOLDER)
 
 #create ES data folder
 if [ ! -d "$ES_VOLUME_FOLDER" ]; then

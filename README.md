@@ -39,7 +39,7 @@ List of pods and containers
 
 Find out which user the image "wants" to run as
 
-    podman run --rm --entrypoint '' <image> id
+    podman run --rm -it <image> id
 
 Container processes
     

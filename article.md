@@ -11,7 +11,7 @@ At the time of this writing (nov 2021), the most popular solution is [Docker](ht
 
 Both are very similar solutions. The Podman website even jokes about the fact that you can just do `alias docker=podman` and you are good to go. This means that the same commands you use for Docker apply to Podman as well
 
->I would **not** set this alias, by the way. I think it would be very confusing.
+>Personally, I would **not** set this alias. I think it would be very confusing.
 
 # 4. Docker vs Podman
 Among the most relevant differences between both approaches, we can list:
@@ -46,11 +46,16 @@ In practice this means that if write changes on a running container, they will b
 # 8. Persisting data with Podman
 As we just discussed, containers are not good are remembering things. In order to achieve persistancy when working with Podman, there's a concept called `volume`.
 A volume works like a shared folder between the host and the container. The changes in one are mirrored on the other. This is very useful for working with databases, for instance. 
+
 # 8.1 Use case for the volume feature
 Let's say you have a PostgreSQL container running. The steps to persist its data would be:
-* Find out the directory where the data is saved (let's call it "X")
-* Pick a folder "Y" on the host
-* Start the container with a volume, mapping "X" to "Y"
-* When the current container dies, the database-related data will be backed up in "X"
-* The next container will than be able to resume the work left by the previous one
+* Find out the directory where the data is saved on the container (let's call it "C")
+* Pick a folder "H" on the host
+* Start the container with a volume, mapping "H" to "C"
+* When the current container dies, the database-related data will be backed up in "H"
+* The next container will than be able to resume the work left by the previous one, since its "C" folder will match "H".
 
+# 9. Port mirroring
+By using the same principle of the volumes, we can mirror ports between host and container using the same sintax `<port_host>:<port_container>`.
+
+# 10. 
